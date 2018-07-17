@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN "
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--
+       db====>(sql.xml,entity,mapper)
+       context:配置generator运行时上下文
+            targetRuntime:指明生成代码方式
+                MyBatis3:  crud+byExample
+                MyBatis3Simple : crud
+    -->
+    <context id="mysqlTable" targetRuntime="MyBatis3Simple">
+
+        <!--
+        注释控制操作
+      -->
+        <commentGenerator>
+            <!--
+              阻止注释生成
+            -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--
+            数据库连接配置
+        -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://39.106.201.66:3306/paying"
+                        userId="root"
+                        password="lw19980219">
+        </jdbcConnection>
+
+
+        <!--<javaTypeResolver>-->
+        <!--<property name="forceBigDecimals" value="false"/>-->
+        <!--</javaTypeResolver>-->
+
+        <!--
+           entity 生成配置
+              targetPackage:指明生成包位置
+              targetProject:生成代码位置
+        -->
+        <javaModelGenerator targetPackage="net.f3322.godlw.entity"
+                            targetProject="C:\Users\Administrator\IdeaProjects\spring-parent\ssm\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--
+           sqlmapper 生成配置
+        -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="C:\Users\Administrator\IdeaProjects\spring-parent\ssm\src\main\resource">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+
+        <!--
+           mapper接口生成配置
+             type: 设置生成客户格式
+               ANNOTATEDMAPPER:注解形式
+               XMLMAPPER:基于xml形式进生成
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="net.f3322.godlw.mapper"
+                             targetProject="C:\Users\Administrator\IdeaProjects\spring-parent\ssm\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--
+           反向生成表配置
+           tableName: 表名
+           domainObjectName:实体名
+        -->
+        <table tableName="client_tab" domainObjectName="Clent">
+
+        </table>
+    </context>
+</generatorConfiguration>

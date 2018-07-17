@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="net.f3322.godlw.service"/>
+
+    <context:property-placeholder file-encoding="utf-8" location="classpath:mysql.config.properties"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="jdbc:mysql://39.106.201.66:3306/paying"/>
+        <property name="username" value="root"/>
+        <property name="password" value="lw19980219"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="typeHandlersPackage" value="net.f3322.godlw.entity"/>
+    </bean>
+
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="net.f3322.godlw.mapper"/>
+    </bean>
+
+     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource"/>
+     </bean>
+
+      <tx:advice id="interceptor" transaction-manager="transactionManager">
+          <tx:attributes>
+              <tx:method name="select*"/>
+              <tx:method name="update*"/>
+              <tx:method name="delete*"/>
+              <tx:method name="insert*"/>
+              <tx:method name="create*"/>
+              <tx:method name="*" read-only="true" no-rollback-for="Exception"/>
+          </tx:attributes>
+      </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id=" daocut" expression="execution(* net.f3322.godlw.mapper.*.*(..))"/>
+        <aop:pointcut id="servicecut" expression="execution(* net.f3322.godlw.service.Impl.*.*(..))"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref=" daocut"/>
+        <aop:advisor advice-ref="interceptor" pointcut-ref="servicecut"/>
+    </aop:config>
+
+
+
+</beans>

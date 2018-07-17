@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.f3322.godlw.mapper.ClientMapper">
+
+    <resultMap id="Basesmapper" type="net.f3322.godlw.entity.ClientEntity">
+        <id property="cid" jdbcType="INTEGER" column="cid"/>
+        <result property="androiddeviceid" jdbcType="VARCHAR" column="androiddeviceid"/>
+        <result property="apkver" jdbcType="VARCHAR" column="apkver"/>
+        <result property="pkgname" jdbcType="VARCHAR" column="pkgname"/>
+        <result property="sn" jdbcType="VARCHAR" column="sn"/>
+        <result property="randstr" jdbcType="VARCHAR" column="randstr"/>
+        <result property="doublenumstr" jdbcType="VARCHAR" column="doublenumstr"/>
+        <result property="isconnectapp" jdbcType="VARCHAR" column="isconnectapp"/>
+        <result property="ischanged" jdbcType="INTEGER" column="ischanged"/>
+        <result property="cashfirst" jdbcType="INTEGER" column="cashfirst"/>
+        <result property="vmpara" jdbcType="VARCHAR" column="vmpara"/>
+        <result property="starttype" jdbcType="VARCHAR" column="starttype"/>
+        <result property="jpushregid" jdbcType="VARCHAR" column="jpushregid"/>
+        <result property="yipaypara" jdbcType="INTEGER" column="yipaypara"/>
+        <result property="baidupara" jdbcType="INTEGER" column="baidupara"/>
+    </resultMap>
+
+    <select id="findAll" parameterType="java.lang.Integer" resultMap="Basesmapper">
+        select * from client_tab;
+    </select>
+
+    <insert id="addClient" parameterType="net.f3322.godlw.entity.ClientEntity">
+        insert into client_tab(androiddeviceid,pkver,pkgname,sn,randstr,doublenumstr,isconnectapp,ischanged,cashfirst,vmpara,starttype,jpushregid,yipaypara,baidupara)
+        VALUE(
+        #{androiddeviceid,jdbcType=VARCHAR},#{pkver,jdbcType=VARCHAR},#{pkgname,jdbcType=VARCHAR},#{sn,jdbcType=VARCHAR},#{randstr,jdbcType=VARCHAR},
+        #{doublenumstr,jdbcType=VARCHAR},#{isconnectapp,jdbcType=VARCHAR},#{ischanged,jdbcType=INTEGER},#{cashfirst,jdbcType=INTEGER},#{vmpara,jdbcType=VARCHAR},
+        #{starttype,jdbcType=VARCHAR},#{jpushregid,jdbcType=VARCHAR},#{yipaypara,jdbcType=INTEGER},#{baidupara,jdbcType=INTEGER});
+    </insert>
+
+    <select id="updateClient" parameterType="net.f3322.godlw.entity.ClientEntity">
+        update
+    </select>
+
+</mapper>
