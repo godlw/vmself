@@ -5,14 +5,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-
+<context:annotation-config/>
 <context:component-scan base-package="net.f3322.godlw.controller"></context:component-scan>
+<context:component-scan base-package="net.f3322.godlw.netty.controller "></context:component-scan>
+
 
     <bean id="internalResourceView" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="suffix" value="/jsp"/>
         <property name="prefix" value=".jsp"/>
     </bean>
 
+    <bean class="net.f3322.godlw.netty.core.ActionBeanPostProcessor"/>
+    <bean id="clientServer" class="net.f3322.godlw.netty.server.ClientServer">
+        <property name="port" value="9090"/>
+    </bean>
 
     <!--<mvc:annotation-config/>-->
 

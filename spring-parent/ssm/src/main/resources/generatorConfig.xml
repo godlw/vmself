@@ -52,7 +52,7 @@
            sqlmapper 生成配置
         -->
         <sqlMapGenerator targetPackage="mapper"
-                         targetProject="C:\Users\Administrator\IdeaProjects\spring-parent\ssm\src\main\resource">
+                         targetProject="C:\Users\Administrator\IdeaProjects\spring-parent\ssm\src\main\resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 

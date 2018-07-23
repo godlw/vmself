@@ -2,6 +2,9 @@ package net.f3322.godlw.controller;
 
 
 import net.f3322.godlw.entity.ClientEntity;
+import net.f3322.godlw.netty.server.ClientServer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,30 +14,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
-@RequestMapping( value = "/vmservice")
+@RequestMapping( value = "/service")
 public class VmparaServiceController {
 
 
-    @PostMapping( value = "/setvmpara")
-    public String setvmpara(ClientEntity clientEntity){
-        if (clientEntity.getCid()!=0){
+    @Autowired
+    private ClientServer clientServer;
 
-        }
-        return "ok";
+    @GetMapping(value = "/start")
+    public void startClientServer(){
+        clientServer.start();
     }
-
-    @RequestMapping(value = "/*")
-    public ModelAndView vmparaservice(String data) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        SimpleDateFormat simpleDateFormatnew = new SimpleDateFormat("yyyy年mm月dd日  HH:mm:ss");
-        modelAndView.addObject("nowdate", simpleDateFormatnew.format(new Date()));
-        modelAndView.addObject("youdata",data);
-        return modelAndView;
-    }
-
-    @PostMapping(value ="goodsname")
-    public void goodsname(){
+    @GetMapping(value = "/sendallow")
+    public void sendallow(){
 
     }
 }
