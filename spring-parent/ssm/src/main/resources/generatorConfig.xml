@@ -27,9 +27,9 @@
             数据库连接配置
         -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://39.106.201.66:3306/paying"
-                        userId="root"
-                        password="lw19980219">
+                        connectionURL="jdbc:mysql://***********"
+                        userId="******"
+                        password="*******">
         </jdbcConnection>
 
 
